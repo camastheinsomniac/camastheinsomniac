@@ -1,0 +1,97 @@
+# Character class
+class Character:
+    def __init__(self, name, clan, element):
+        self.name = name
+        self.clan = clan
+        self.element = element
+        self.health = 100
+        self.chakra = 100
+        self.skills = self.get_clan_skills()
+        self.experience = 0
+        self.level = 1
+        self.alignment = "Neutral"
+
+    def get_clan_skills(self):
+        if self.clan == "Uchiha":
+            return ["Sharingan", "Fireball Jutsu", "Amaterasu"]
+        elif self.clan == "Hyuga":
+            return ["Byakugan", "Gentle Fist", "Rotation"]
+        else:
+            return ["Basic Jutsu", "Chakra Enhancement", "Shadow Clone"]
+
+    def attack(self, target):
+        # Choose a random skill
+        skill = random.choice(self.skills)
+        print(f"{self.name} uses {skill}!")
+        # Apply damage based on skill
+        damage = 10  # Adjust for different skills later
+        target.health -= damage
+        print(f"{target.name} takes {damage} damage.")
+
+    def level_up(self):
+        # Increase stats and potentially unlock new skills
+        self.level += 1
+        self.health += 10
+        self.chakra += 10
+        # Add skill unlock logic here
+
+# Game World
+class World:
+    def __init__(self):
+        self.players = []
+        self.locations = {
+            "Hidden Leaf Village": {"description": "The heart of the shinobi world.", "events": []},
+            "Forest of Death": {"description": "A dangerous training ground.", "events": []},
+        }
+
+    def add_player(self, player):
+        self.players.append(player)
+
+    def move_player(self, player, location):
+        # Implement movement logic here
+        print(f"{player.name} moved to {location}.")
+
+    def trigger_event(self, location):
+        # Handle events for each location
+        pass
+
+# Example Usage
+# Create a player character
+player1 = Character("Naruto", "Uzumaki", "Wind")
+player2 = Character("Sasuke", "Uchiha", "Fire")
+
+# Create a game world
+game_world = World()
+
+# Add players to the world
+game_world.add_player(player1)
+game_world.add_player(player2)
+
+# Start the game
+print("Welcome to NARUTO: SHINOBI ASCENSION!")
+while True:
+    # Display options to the player
+    print("What do you want to do?")
+    print("1. Move to another location")
+    print("2. Attack another player")
+    print("3. Train and level up")
+    print("4. Quit")
+
+    # Get player input
+    choice = input("Enter your choice: ")
+
+    # Process player input
+    if choice == "1":
+        # Implement location movement
+        pass
+    elif choice == "2":
+        # Implement attack functionality
+        player1.attack(player2)
+    elif choice == "3":
+        # Implement training and leveling up
+        pass
+    elif choice == "4":
+        print("Thanks for playing!")
+        break
+    else:
+        print("Invalid choice. Please try again.")
